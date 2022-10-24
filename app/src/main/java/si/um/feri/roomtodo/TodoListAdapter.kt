@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import si.um.feri.roomtodo.databinding.RecyclerviewItemBinding
 
 class TodoListAdapter internal constructor(
     context: Context
@@ -14,14 +15,12 @@ class TodoListAdapter internal constructor(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var todos = emptyList<Todo>()
 
-    inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val todoItemView: TextView = itemView.findViewById(R.id.textView)
+    inner class TodoViewHolder(binding: RecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        val todoItemView: TextView = binding.textView
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
-        return TodoViewHolder(itemView)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder =
+        TodoViewHolder(RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = todos[position]

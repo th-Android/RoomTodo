@@ -52,9 +52,9 @@ public abstract class TodoRoomDatabase : RoomDatabase() {
 
             todoDao.deleteAll()
 
-            var todo = Todo("Pridi pravočasno na zimsko šolo")
+            var todo = Todo("Pridi pravočasno vaje")
             todoDao.insert(todo)
-            todo = Todo("Kupi punci darilo")
+            todo = Todo("Kupi darilo")
             todoDao.insert(todo)
         }
     }

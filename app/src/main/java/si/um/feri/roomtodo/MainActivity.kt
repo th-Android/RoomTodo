@@ -10,17 +10,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import si.um.feri.roomtodo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var todoViewModel: TodoViewModel
     private val newTodoActivityRequestCode = 1
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val recyclerView = binding.recyclerview
         val adapter = TodoListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             todos?.let { adapter.setTodos(it) }
         })
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        val fab = binding.fab
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, NewTodoActivity::class.java)
             startActivityForResult(intent, newTodoActivityRequestCode)
